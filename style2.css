@@ -1,0 +1,237 @@
+/* /////////////////////// THEMES /////////////////////// */
+:root {
+  --gray0: #f8f8f8;
+  --gray1: #dbe1e8;
+  --gray2: #b2becd;
+  --gray3: #6c7983;
+  --gray4: #454e56;
+  --gray5: #2a2e35;
+  --gray6: #12181b;
+  --blue: #0084a5;
+  --purple: #a82dd1;
+  --yellow: #fff565;
+}
+
+.light {
+  --bg: var(--gray0);
+  --bg-nav: linear-gradient(to right, var(--gray1), var(--gray3));
+  --bg-dropdown: var(--gray0);
+  --text: var(--gray6);
+  --border-color: var(--blue);
+  --bg-solar: #5ec72d;
+  --scrollbar: var(--gray2);
+}
+.dark {
+  --bg: var(--gray5);
+  --bg-nav: linear-gradient(to right, var(--gray5), var(--gray6));
+  --bg-dropdown: var(--gray6);
+  --text: var(--gray0);
+  --border-color: var(--purple);
+  --bg-solar: #5ec72d;
+  --scrollbar: var(--gray2);
+}
+.solar {
+  --bg: #fbffd4;
+  --bg-nav: linear-gradient(to right, #f7f8d0, #5ec72d);
+  --bg-dropdown: #fbffd4;
+  --text: #003d4c;
+  --border-color: #005368;
+  --bg-solar: #5ec72d;
+  --scrollbar: #005368;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--text);
+  background: var(--bg);
+  transition: background 0.5s ease-in-out, color 1s ease-in-out;
+}
+
+header {
+  padding-bottom: 4rem;
+  background-image: var(--bg-nav);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+}
+
+/* /////////////////////// NAVBAR /////////////////////// */
+.navbar {
+  height: 3rem;
+  font-size: 1.1rem;
+}
+
+.navbar_nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style-type: none;
+  font-weight: bold;
+}
+
+.anchor_nav {
+  text-decoration: none;
+  color: currentColor;
+}
+
+li.has_dropdown {
+  position: relative;
+}
+
+li ul.dropdown {
+  position: absolute;
+  height: 3.3rem;
+  width: 28rem;
+  transform: translate(-45%, 32%);
+  background: var(--bg-dropdown);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 0 3px var(--border-color);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-out;
+}
+
+ul.dropdown li {
+  margin: 0rem 2rem;
+}
+
+li.has_dropdown:focus-within ul.dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* CIRCLE */
+ul.dropdown li::before {
+  content: "";
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  display: inline-block;
+  align-items: center;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+#light::before {
+  background: white;
+}
+ul.dropdown li:nth-of-type(2)::before {
+  background: black;
+}
+
+#solar::before {
+  background: var(--bg-solar);
+}
+
+/* /////////////////////// TITLE /////////////////////// */
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.title img {
+  width: 15rem;
+  margin-bottom: 1rem;
+}
+
+/* /////////////////////// CONTAINER /////////////////////// */
+.container {
+  margin: 4rem 3rem;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
+.container h3 {
+  margin-bottom: 1rem;
+}
+
+.container p {
+  margin-bottom: 0.9rem;
+}
+
+.container > div + div {
+  margin-top: 3rem;
+}
+
+/* /////////////////////// SCROLLBAR /////////////////////// */
+::-webkit-scrollbar {
+  width: 0.9rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar);
+  border-radius: 2rem;
+}
+
+/* /////////////////////// ANIMATION /////////////////////// */
+
+@keyframes color-rotation {
+  from {
+    filter: hue-rotate(0deg);
+  }
+
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.title img:hover {
+  animation: color-rotation 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* /////////////////////////////////// MEDIA QUERIES /////////////////////////////////// */
+@media only screen and (max-width: 600px) {
+  p {
+    font-size: 1rem;
+  }
+
+  .title img {
+    width: 160px;
+  }
+
+  li.has_dropdown ul.navbar_nav {
+    flex-direction: column;
+  }
+
+  li ul.dropdown {
+    height: 10rem;
+    width: 8rem;
+    transform: translate(-32%, 10%);
+  }
+
+  ul.dropdown li {
+    margin: 0.4rem 0;
+  }
+
+  ul.dropdown li::before {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .title h1 {
+    font-size: 1.6rem;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .col > p + p {
+    margin-top: 1.5rem;
+  }
+}
